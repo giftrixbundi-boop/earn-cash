@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CashQuest Kenya – Earn Money Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --emerald:   #00C47A;
+  --emerald-d: #009E60;
+  --sapphire:  #0A5CF5;
+  --sapphire-d:#0447C2;
+  --gold:      #F5A623;
+  --bg:        #F5F8FF;
+  --card:      #FFFFFF;
+  --text:      #0D1B2A;
+  --muted:     #5F7080;
+  --border:    #E2EAF4;
+  --sidebar-w: 250px;
+  --header-h:  64px;
+  --radius:    14px;
+  --radius-sm: 8px;
+  --shadow:    0 2px 16px rgba(10,92,245,.08);
+  --shadow-md: 0 8px 32px rgba(10,92,245,.13);
+}
+[data-theme="dark"] {
+  --bg:     #0D1421;
+  --card:   #152035;
+  --text:   #E8F0FE;
+  --muted:  #7A90A8;
+  --border: #1E3050;
+  --shadow: 0 2px 16px rgba(0,0,0,.35);
+  --shadow-md: 0 8px 32px rgba(0,0,0,.45);
+}
+
+/* ─── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .3s,color .3s}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+input,select,textarea{font-family:inherit;outline:none;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.65rem .9rem;background:var(--card);color:var(--text);width:100%;font-size:.93rem;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--emerald)}
+
+/* ─── UTILITIES ──────────────────────────────────────────── */
+.hidden{display:none!important}
+.flex{display:flex}
+.items-center{align-items:center}
+.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}
+.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}
+.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}
+.text-sm{font-size:.85rem}.text-xs{font-size:.75rem}
+.text-muted{color:var(--muted)}
+.text-emerald{color:var(--emerald)}
+.text-gold{color:var(--gold)}
+.font-bold{font-weight:700}.font-600{font-weight:600}
+.w-full{width:100%}
+
+/* ─── BUTTONS ─────────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;padding:.7rem 1.4rem;border-radius:50px;font-size:.9rem;font-weight:700;transition:all .2s;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--emerald),var(--sapphire));color:#fff;box-shadow:0 4px 18px rgba(0,196,122,.35)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,196,122,.45)}
+.btn-secondary{background:transparent;border:1.5px solid var(--emerald);color:var(--emerald)}
+.btn-secondary:hover{background:var(--emerald);color:#fff}
+.btn-ghost{background:var(--bg);color:var(--text)}
+.btn-ghost:hover{background:var(--border)}
+.btn-sm{padding:.45rem 1rem;font-size:.82rem}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#e8920f);color:#fff;box-shadow:0 4px 16px rgba(245,166,35,.35)}
+
+/* ─── CARDS ───────────────────────────────────────────────── */
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.3rem;border:1px solid var(--border)}
+
+/* ─── BADGE ───────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .65rem;border-radius:50px;font-size:.72rem;font-weight:700}
+.badge-green{background:rgba(0,196,122,.12);color:var(--emerald)}
+.badge-blue{background:rgba(10,92,245,.1);color:var(--sapphire)}
+.badge-gold{background:rgba(245,166,35,.12);color:var(--gold)}
+.badge-red{background:rgba(239,68,68,.1);color:#ef4444}
+
+/* ─── PAGE VIEWS ─────────────────────────────────────────── */
+.page{display:none}
+.page.active{display:block}
+
+/* ════════════════════════════════════════════════════════════
+   LANDING PAGE
+════════════════════════════════════════════════════════════ */
+#page-landing{background:var(--bg)}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--card);border-bottom:1px solid var(--border);height:var(--header-h);display:flex;align-items:center;padding:0 1.2rem;gap:1rem}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:.5rem}
+.nav-logo span.em{color:var(--emerald)}
+.nav-logo span.sa{color:var(--sapphire)}
+.nav-spacer{flex:1}
+.nav-links{display:none;gap:1.5rem;align-items:center}
+@media(min-width:768px){.nav-links{display:flex}}
+.nav-link{font-size:.88rem;font-weight:600;color:var(--muted);transition:color .2s}
+.nav-link:hover{color:var(--text)}
+.theme-toggle{width:36px;height:36px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.theme-toggle:hover{background:var(--border)}
+
+/* HERO */
+.hero{padding-top:calc(var(--header-h)+3rem);padding-bottom:3rem;min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(0,196,122,.13) 0%,transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-150px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(10,92,245,.1) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;padding:0 1.2rem;display:grid;gap:2.5rem;grid-template-columns:1fr;align-items:center}
+@media(min-width:768px){.hero-inner{grid-template-columns:1fr 1fr}}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,196,122,.12);border:1px solid rgba(0,196,122,.3);border-radius:50px;padding:.35rem .85rem;font-size:.78rem;font-weight:700;color:var(--emerald);margin-bottom:1rem}
+.hero-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,6vw,3.2rem);font-weight:700;line-height:1.15;letter-spacing:-.02em}
+.hero-title .accent{background:linear-gradient(135deg,var(--emerald),var(--sapphire));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--muted);margin:1rem 0 1.8rem;max-width:480px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-top:1.5rem}
+.stat-pill{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.75rem;text-align:center;box-shadow:var(--shadow)}
+.stat-pill .num{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--emerald)}
+.stat-pill .lbl{font-size:.7rem;color:var(--muted);font-weight:600;margin-top:.1rem}
+
+/* HERO VISUAL */
+.hero-visual{position:relative}
+.earnings-card{background:linear-gradient(135deg,var(--sapphire),#0D3AAF);border-radius:20px;padding:1.5rem;color:#fff;box-shadow:var(--shadow-md)}
+.earnings-card .label{font-size:.78rem;opacity:.75;font-weight:600;margin-bottom:.3rem}
+.earnings-card .amount{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700}
+.earnings-card .amount span{font-size:1rem;opacity:.7}
+.mini-tasks{margin-top:1rem;display:flex;flex-direction:column;gap:.6rem}
+.mini-task{background:rgba(255,255,255,.12);border-radius:10px;padding:.6rem .8rem;display:flex;align-items:center;gap:.7rem;font-size:.83rem}
+.mini-task .icon{font-size:1.1rem}
+.mini-task .reward{margin-left:auto;font-weight:700;color:#7BF5C2}
+.floating-badge{position:absolute;background:var(--gold);color:#fff;border-radius:50px;padding:.45rem 1rem;font-size:.78rem;font-weight:700;box-shadow:0 4px 16px rgba(245,166,35,.4);white-space:nowrap}
+.fb1{top:-20px;right:-10px;animation:floatY 3s ease-in-out infinite}
+.fb2{bottom:60px;left:-30px;animation:floatY 3s ease-in-out .8s infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* HOW IT WORKS */
+.section{padding:4rem 1.2rem;max-width:1100px;margin:0 auto}
+.section-tag{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald);margin-bottom:.5rem}
+.section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.5rem,4vw,2.3rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
+.section-sub{color:var(--muted);font-size:.97rem;max-width:560px;margin-bottom:2.5rem}
+.steps-grid{display:grid;gap:1.5rem;grid-template-columns:1fr}
+@media(min-width:600px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.steps-grid{grid-template-columns:repeat(4,1fr)}}
+.step-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;position:relative;transition:transform .2s,box-shadow .2s}
+.step-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--emerald),var(--sapphire));color:#fff;font-size:.82rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.step-icon{font-size:1.8rem;margin-bottom:.7rem}
+.step-card h3{font-size:.97rem;font-weight:700;margin-bottom:.35rem}
+.step-card p{font-size:.82rem;color:var(--muted);line-height:1.5}
+
+/* EARNING WAYS */
+.ways-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+@media(min-width:600px){.ways-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.ways-grid{grid-template-columns:repeat(4,1fr)}}
+.way-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;text-align:center;transition:all .2s;cursor:default}
+.way-card:hover{border-color:var(--emerald);box-shadow:0 0 0 3px rgba(0,196,122,.1)}
+.way-icon{font-size:2rem;margin-bottom:.6rem}
+.way-card h3{font-size:.88rem;font-weight:700;margin-bottom:.25rem}
+.way-card p{font-size:.75rem;color:var(--muted)}
+.way-card .earn-tag{font-size:.72rem;font-weight:700;color:var(--emerald);margin-top:.5rem}
+
+/* TESTIMONIALS */
+.testimonials-grid{display:grid;gap:1.2rem;grid-template-columns:1fr}
+@media(min-width:600px){.testimonials-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.testimonials-grid{grid-template-columns:repeat(3,1fr)}}
+.testi-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.3rem}
+.testi-stars{color:var(--gold);font-size:1rem;margin-bottom:.7rem;letter-spacing:.1em}
+.testi-text{font-size:.88rem;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:1rem}
+.testi-author{display:flex;align-items:center;gap:.7rem}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--emerald),var(--sapphire));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;color:#fff;flex-shrink:0}
+.testi-name{font-weight:700;font-size:.88rem}
+.testi-loc{font-size:.74rem;color:var(--muted)}
+
+/* CTA BANNER */
+.cta-banner{background:linear-gradient(135deg,var(--emerald),var(--sapphire));border-radius:var(--radius);padding:2.5rem 1.5rem;text-align:center;color:#fff;margin:0 1.2rem 4rem}
+.cta-banner h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.4rem,4vw,2rem);font-weight:700;margin-bottom:.6rem}
+.cta-banner p{opacity:.85;font-size:.95rem;margin-bottom:1.5rem;max-width:450px;margin-left:auto;margin-right:auto}
+.cta-banner .btn-white{background:#fff;color:var(--emerald);font-weight:700;padding:.8rem 2rem;border-radius:50px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+
+/* FOOTER */
+.footer{background:var(--card);border-top:1px solid var(--border);padding:2.5rem 1.2rem 1.5rem;max-width:1100px;margin:0 auto}
+.footer-grid{display:grid;gap:2rem;grid-template-columns:1fr}
+@media(min-width:600px){.footer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.footer-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.footer-brand p{font-size:.83rem;color:var(--muted);margin-top:.6rem;max-width:220px;line-height:1.6}
+.footer-col h4{font-size:.85rem;font-weight:700;margin-bottom:.8rem}
+.footer-col a{display:block;font-size:.82rem;color:var(--muted);margin-bottom:.45rem;transition:color .2s}
+.footer-col a:hover{color:var(--emerald)}
+.footer-bottom{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--border);font-size:.78rem;color:var(--muted)}
+
+/* ════════════════════════════════════════════════════════════
+   AUTH PAGES
+════════════════════════════════════════════════════════════ */
+.auth-wrapper{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:var(--bg)}
+.auth-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:2rem 1.8rem;width:100%;max-width:420px;border:1px solid var(--border)}
+.auth-logo{text-align:center;margin-bottom:1.5rem}
+.auth-logo .logo-mark{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--emerald),var(--sapphire));margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.auth-logo h1{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700}
+.auth-logo p{font-size:.83rem;color:var(--muted);margin-top:.2rem}
+.form-group{margin-bottom:1.1rem}
+.form-group label{display:block;font-size:.83rem;font-weight:600;margin-bottom:.4rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.auth-divider{text-align:center;color:var(--muted);font-size:.8rem;margin:1rem 0;position:relative}
+.auth-divider::before,.auth-divider::after{content:'';position:absolute;top:50%;height:1px;background:var(--border);width:calc(50% - 30px)}
+.auth-divider::before{left:0}.auth-divider::after{right:0}
+.auth-switch{text-align:center;font-size:.83rem;color:var(--muted);margin-top:1.2rem}
+.auth-switch a{color:var(--emerald);font-weight:600;cursor:pointer}
+.otp-inputs{display:flex;gap:.6rem;justify-content:center}
+.otp-inputs input{width:48px;height:52px;text-align:center;font-size:1.3rem;font-weight:700;border-radius:var(--radius-sm);padding:0}
+.referral-info{background:rgba(0,196,122,.07);border:1px solid rgba(0,196,122,.2);border-radius:var(--radius-sm);padding:.8rem;font-size:.82rem;display:flex;gap:.5rem;align-items:flex-start;margin-top:-.5rem;margin-bottom:1.1rem}
+
+/* ════════════════════════════════════════════════════════════
+   DASHBOARD LAYOUT
+════════════════════════════════════════════════════════════ */
+#page-dashboard{display:none}
+#page-dashboard.active{display:flex;flex-direction:column;min-height:100vh}
+.dash-header{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.2rem;gap:1rem}
+.dash-header .logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
+.dash-header .logo .em{color:var(--emerald)}
+.dash-header .logo .sa{color:var(--sapphire)}
+.menu-btn{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+@media(min-width:900px){.menu-btn{display:none}}
+.header-user{display:flex;align-items:center;gap:.6rem;margin-left:auto}
+.header-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--emerald),var(--sapphire));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.85rem}
+.header-name{font-size:.88rem;font-weight:600;display:none}
+@media(min-width:500px){.header-name{display:block}}
+.notif-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.notif-dot{position:absolute;top:6px;right:7px;width:8px;height:8px;border-radius:50%;background:var(--emerald);border:2px solid var(--card)}
+
+.dash-body{display:flex;padding-top:var(--header-h);flex:1}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:var(--header-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);overflow-y:auto;padding:1rem 0;transform:translateX(-100%);transition:transform .25s;z-index:90}
+.sidebar.open{transform:translateX(0)}
+@media(min-width:900px){.sidebar{position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));transform:none;flex-shrink:0;overflow-y:auto}}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:89}
+.sidebar-overlay.show{display:block}
+@media(min-width:900px){.sidebar-overlay{display:none!important}}
+.nav-section{padding:.3rem 1.2rem .2rem;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:.6rem}
+.nav-item{display:flex;align-items:center;gap:.75rem;padding:.62rem 1.2rem;font-size:.88rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;border-left:3px solid transparent}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:rgba(0,196,122,.08);color:var(--emerald);border-left-color:var(--emerald)}
+.nav-item .icon{font-size:1.1rem;width:22px;text-align:center;flex-shrink:0}
+.nav-item .badge-count{margin-left:auto;background:var(--emerald);color:#fff;font-size:.65rem;font-weight:800;padding:.1rem .5rem;border-radius:50px}
+.sidebar-wallet{margin:1rem 1.2rem;background:linear-gradient(135deg,var(--emerald),var(--sapphire));border-radius:var(--radius-sm);padding:1rem;color:#fff}
+.sidebar-wallet .label{font-size:.72rem;opacity:.8;font-weight:600;margin-bottom:.2rem}
+.sidebar-wallet .amount{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700}
+.sidebar-wallet .sub{font-size:.72rem;opacity:.7;margin-top:.1rem}
+
+/* MAIN CONTENT */
+.main-content{flex:1;min-width:0;padding:1.5rem 1.2rem;max-width:1000px}
+@media(min-width:900px){.main-content{padding:1.8rem 2rem}}
+
+/* PANEL PAGES */
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:1.5rem}
+
+/* OVERVIEW STATS */
+.overview-stats{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr)}
+@media(min-width:600px){.overview-stats{grid-template-columns:repeat(4,1fr)}}
+.ov-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;box-shadow:var(--shadow)}
+.ov-stat .label{font-size:.75rem;color:var(--muted);font-weight:600;margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem}
+.ov-stat .value{font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700}
+.ov-stat .change{font-size:.73rem;font-weight:700;margin-top:.25rem}
+.change-up{color:var(--emerald)}.change-dn{color:#ef4444}
+
+/* MINI CHART */
+.chart-bar-wrap{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:.6rem}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;background:rgba(0,196,122,.2);transition:background .2s}
+.chart-bar.active{background:var(--emerald)}
+
+/* QUICK ACTIONS */
+.quick-actions{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-top:1.2rem}
+@media(min-width:480px){.quick-actions{grid-template-columns:repeat(4,1fr)}}
+.qa-btn{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem .8rem;text-align:center;cursor:pointer;transition:all .2s;font-size:.82rem;font-weight:600}
+.qa-btn:hover{border-color:var(--emerald);box-shadow:0 0 0 3px rgba(0,196,122,.1)}
+.qa-btn .qa-icon{font-size:1.6rem;margin-bottom:.35rem}
+
+/* ACTIVITY FEED */
+.activity-list{display:flex;flex-direction:column;gap:.6rem;margin-top:.75rem}
+.activity-item{display:flex;align-items:center;gap:.85rem;padding:.7rem .9rem;background:var(--bg);border-radius:var(--radius-sm);font-size:.83rem}
+.activity-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ai-green{background:rgba(0,196,122,.12)}.ai-blue{background:rgba(10,92,245,.1)}.ai-gold{background:rgba(245,166,35,.12)}
+.activity-desc{flex:1;font-weight:500}
+.activity-time{font-size:.72rem;color:var(--muted)}
+.activity-amount{font-weight:700;font-size:.88rem;color:var(--emerald);white-space:nowrap}
+
+/* SURVEYS */
+.survey-list{display:flex;flex-direction:column;gap:1rem}
+.survey-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+.survey-card .survey-meta{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:.6rem}
+.survey-card h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.survey-card p{font-size:.82rem;color:var(--muted);margin-bottom:.9rem;line-height:1.5}
+.survey-footer{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.survey-reward{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:var(--emerald)}
+.survey-detail{font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
+.progress-bar{height:5px;background:var(--border);border-radius:50px;overflow:hidden;flex:1;min-width:80px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--emerald),var(--sapphire));border-radius:50px;transition:width .5s}
+
+/* TASKS */
+.task-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.task-tab{padding:.45rem 1rem;border-radius:50px;font-size:.83rem;font-weight:600;background:var(--bg);border:1.5px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s}
+.task-tab.active{background:var(--emerald);border-color:var(--emerald);color:#fff}
+.task-grid{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media(min-width:600px){.task-grid{grid-template-columns:repeat(2,1fr)}}
+.task-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem;display:flex;gap:1rem;align-items:flex-start;box-shadow:var(--shadow)}
+.task-thumb{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;background:var(--bg)}
+.task-info{flex:1;min-width:0}
+.task-info h3{font-size:.9rem;font-weight:700;margin-bottom:.2rem}
+.task-info p{font-size:.78rem;color:var(--muted);margin-bottom:.6rem;line-height:1.4}
+.task-footer{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.task-reward{font-weight:700;color:var(--emerald);font-size:.88rem}
+.task-done{background:rgba(0,196,122,.1);border:none;color:var(--emerald);border-radius:50px;padding:.25rem .8rem;font-size:.75rem;font-weight:700;margin-left:auto}
+
+/* WALLET */
+.wallet-cards{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:600px){.wallet-cards{grid-template-columns:repeat(3,1fr)}}
+.wallet-card{border-radius:var(--radius);padding:1.3rem;color:#fff;position:relative;overflow:hidden}
+.wallet-card::before{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.1)}
+.wc-main{background:linear-gradient(135deg,var(--sapphire),#0D3AAF)}
+.wc-ref{background:linear-gradient(135deg,var(--emerald),#009E60)}
+.wc-bonus{background:linear-gradient(135deg,var(--gold),#e8920f)}
+.wallet-card .wc-label{font-size:.75rem;opacity:.8;font-weight:600;margin-bottom:.4rem}
+.wallet-card .wc-amount{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700}
+.wallet-card .wc-sub{font-size:.75rem;opacity:.7;margin-top:.3rem}
+.withdraw-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;margin-top:1.2rem;box-shadow:var(--shadow)}
+.withdraw-form h3{font-size:1rem;font-weight:700;margin-bottom:1.1rem}
+.payment-methods{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.pm-option{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:.55rem 1rem;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.4rem}
+.pm-option.selected{border-color:var(--emerald);background:rgba(0,196,122,.07);color:var(--emerald)}
+.tx-list{display:flex;flex-direction:column;gap:.65rem;margin-top:1rem}
+.tx-item{display:flex;align-items:center;gap:.8rem;padding:.65rem .9rem;background:var(--bg);border-radius:var(--radius-sm);font-size:.83rem}
+.tx-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.tx-in{background:rgba(0,196,122,.12)}.tx-out{background:rgba(239,68,68,.1)}
+.tx-label{flex:1;font-weight:600}
+.tx-sub{font-size:.72rem;color:var(--muted)}
+.tx-amount{font-weight:700;font-size:.88rem}
+.tx-amount.in{color:var(--emerald)}.tx-amount.out{color:#ef4444}
+
+/* REFERRAL */
+.ref-link-box{background:var(--bg);border:1.5px dashed var(--emerald);border-radius:var(--radius-sm);padding:1rem;display:flex;align-items:center;gap:.75rem;margin-bottom:1.3rem;flex-wrap:wrap}
+.ref-link-box span{flex:1;font-size:.83rem;color:var(--muted);word-break:break-all}
+.ref-levels{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);margin-bottom:1.3rem}
+.ref-level{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
+.ref-level .lv{font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+.ref-level .earn{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;color:var(--emerald)}
+.ref-level .desc{font-size:.73rem;color:var(--muted);margin-top:.15rem}
+.ref-team{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem}
+.ref-team-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.ref-team-header h3{font-size:.97rem;font-weight:700}
+.referral-member{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.85rem}
+.referral-member:last-child{border-bottom:none;padding-bottom:0}
+.rm-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--sapphire),var(--emerald));color:#fff;font-weight:700;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rm-name{flex:1;font-weight:600}
+.rm-level{font-size:.72rem;color:var(--muted)}
+.rm-earned{font-weight:700;color:var(--emerald);font-size:.85rem}
+
+/* LEADERBOARD */
+.leaderboard-list{display:flex;flex-direction:column;gap:.7rem}
+.lb-item{display:flex;align-items:center;gap:.9rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;box-shadow:var(--shadow)}
+.lb-rank{width:32px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1rem;text-align:center;flex-shrink:0}
+.lb-rank.top1{color:var(--gold)}.lb-rank.top2{color:#94A3B8}.lb-rank.top3{color:#CD7F32}
+.lb-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--emerald),var(--sapphire));color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lb-info{flex:1;min-width:0}
+.lb-name{font-weight:700;font-size:.9rem}
+.lb-stat{font-size:.75rem;color:var(--muted)}
+.lb-earnings{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--emerald);font-size:1rem}
+.lb-badge{font-size:1.2rem}
+
+/* SPIN WHEEL */
+.spin-container{display:flex;flex-direction:column;align-items:center;gap:1.5rem;padding:1.5rem 0}
+.wheel-wrap{position:relative;width:260px;height:260px}
+.wheel-canvas{width:260px;height:260px;border-radius:50%;border:6px solid var(--border);box-shadow:var(--shadow-md)}
+.wheel-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:1.8rem;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2))}
+.spin-info{text-align:center;max-width:320px}
+.spin-info h3{font-weight:700;margin-bottom:.4rem}
+.spin-info p{font-size:.85rem;color:var(--muted);margin-bottom:1rem}
+.spin-record{display:flex;flex-direction:column;gap:.5rem;width:100%;max-width:320px}
+.spin-record-item{display:flex;align-items:center;gap:.75rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.6rem .9rem;font-size:.83rem}
+.spin-record-item .sr-prize{font-weight:700;color:var(--emerald);margin-left:auto}
+
+/* ADMIN */
+.admin-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:.75rem}
+.admin-tab{padding:.4rem .9rem;border-radius:var(--radius-sm) var(--radius-sm) 0 0;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;border:1px solid transparent;background:var(--bg)}
+.admin-tab.active{background:var(--card);border-color:var(--border);border-bottom-color:var(--card);color:var(--text);margin-bottom:-1px}
+.admin-stats{display:grid;gap:1rem;grid-template-columns:repeat(2,1fr);margin-bottom:1.3rem}
+@media(min-width:600px){.admin-stats{grid-template-columns:repeat(4,1fr)}}
+.admin-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;text-align:center}
+.admin-stat .as-num{font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;color:var(--emerald)}
+.admin-stat .as-label{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.data-table{width:100%;border-collapse:collapse;font-size:.83rem}
+.data-table th{text-align:left;padding:.65rem .9rem;background:var(--bg);color:var(--muted);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.data-table td{padding:.75rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.data-table tr:hover td{background:var(--bg)}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius)}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:.4rem}
+.dot-green{background:var(--emerald)}.dot-orange{background:var(--gold)}.dot-red{background:#ef4444}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.show{opacity:1;pointer-events:all}
+.modal-box{background:var(--card);border-radius:var(--radius);padding:1.8rem;max-width:460px;width:100%;box-shadow:var(--shadow-md);transform:scale(.95);transition:transform .2s;border:1px solid var(--border)}
+.modal-overlay.show .modal-box{transform:scale(1)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.modal-header h3{font-size:1.05rem;font-weight:700}
+.modal-close{width:30px;height:30px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;line-height:1}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:1.2rem;right:1.2rem;z-index:300;display:flex;flex-direction:column;gap:.6rem;pointer-events:none}
+.toast{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.8rem 1.1rem;font-size:.85rem;font-weight:600;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:.6rem;max-width:300px;pointer-events:all;animation:toastIn .3s ease;border-left:4px solid var(--emerald)}
+.toast.error{border-left-color:#ef4444}
+.toast.warning{border-left-color:var(--gold)}
+@keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+
+/* BOTTOM NAV (mobile) */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--card);border-top:1px solid var(--border);display:flex;padding:.5rem 0 calc(.5rem + env(safe-area-inset-bottom))}
+@media(min-width:900px){.bottom-nav{display:none}}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:.2rem;font-size:.62rem;font-weight:600;color:var(--muted);cursor:pointer;padding:.3rem 0;transition:color .2s}
+.bn-item.active{color:var(--emerald)}
+.bn-item .bn-icon{font-size:1.25rem;line-height:1}
+
+/* MISC */
+.divider{height:1px;background:var(--border);margin:1.2rem 0}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.empty-state .es-icon{font-size:3rem;margin-bottom:.75rem;opacity:.4}
+.empty-state h3{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.empty-state p{font-size:.83rem}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     TOAST CONTAINER
+══════════════════════════════════════════════════════════ -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <h3 id="modalTitle">Modal</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     LANDING PAGE
+══════════════════════════════════════════════════════════ -->
+<div id="page-landing" class="page active">
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo"><span class="em">Cash</span><span class="sa">Quest</span>&nbsp;Kenya</div>
+    <div class="nav-spacer"></div>
+    <div class="nav-links">
+      <a class="nav-link" href="#how">How It Works</a>
+      <a class="nav-link" href="#earn">Earn</a>
+      <a class="nav-link" href="#testimonials">Reviews</a>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <button class="btn btn-secondary btn-sm" onclick="showPage('login')">Log In</button>
+    <button class="btn btn-primary btn-sm" onclick="showPage('register')">Join Free</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow">🇰🇪 Kenya's #1 Earning Platform</div>
+        <h1 class="hero-title">Turn Your Time Into <span class="accent">Real Cash</span></h1>
+        <p class="hero-sub">Complete surveys, watch videos, refer friends, and win rewards. Withdraw directly to M-Pesa anytime.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="showPage('register')">🚀 Start Earning Today</button>
+          <button class="btn btn-ghost" onclick="scrollToHow()">See How It Works</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill"><div class="num">48K+</div><div class="lbl">Members</div></div>
+          <div class="stat-pill"><div class="num">KSh 2.3M</div><div class="lbl">Paid Out</div></div>
+          <div class="stat-pill"><div class="num">4.8★</div><div class="lbl">Rating</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="earnings-card">
+          <div class="label">Total Earnings This Month</div>
+          <div class="amount"><span>KSh </span>12,450</div>
+          <div class="mini-tasks">
+            <div class="mini-task"><span class="icon">📋</span> Survey Completed<span class="reward">+KSh 150</span></div>
+            <div class="mini-task"><span class="icon">🎥</span> Video Watched<span class="reward">+KSh 25</span></div>
+            <div class="mini-task"><span class="icon">👥</span> Referral Bonus<span class="reward">+KSh 300</span></div>
+            <div class="mini-task"><span class="icon">🎰</span> Spin Win<span class="reward">+KSh 500</span></div>
+          </div>
+        </div>
+        <div class="floating-badge fb1">🎉 +KSh 300 Referral!</div>
+        <div class="floating-badge fb2">✅ Withdrawal Sent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <div id="how">
+    <div class="section">
+      <div class="section-tag">Simple Process</div>
+      <h2 class="section-title">Start Earning in 4 Steps</h2>
+      <p class="section-sub">No experience needed. Join thousands of Kenyans already earning from their phones.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon">📝</div>
+          <h3>Register Free</h3>
+          <p>Create your account with phone or email. Verify with OTP and get your unique referral code instantly.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon">✅</div>
+          <h3>Complete Tasks</h3>
+          <p>Take surveys, watch videos, click ads, follow pages, and more. Each task pays real Kenyan shillings.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon">👥</div>
+          <h3>Refer & Earn More</h3>
+          <p>Share your referral link. Earn KSh 300 per Level 1 referral, plus commissions on their activity.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-icon">💸</div>
+          <h3>Withdraw to M-Pesa</h3>
+          <p>Cash out directly to M-Pesa or Airtel Money with a minimum of KSh 500. Processed within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAYS TO EARN -->
+  <div id="earn" style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="section">
+      <div class="section-tag">Earn Everywhere</div>
+      <h2 class="section-title">8 Ways to Make Money</h2>
+      <p class="section-sub">Stack multiple income streams for maximum earnings every day.</p>
+      <div class="ways-grid">
+        <div class="way-card"><div class="way-icon">📋</div><h3>Paid Surveys</h3><p>Share your opinion with brands</p><div class="earn-tag">Up to KSh 500</div></div>
+        <div class="way-card"><div class="way-icon">🎥</div><h3>Watch Videos</h3><p>Watch promo content & earn</p><div class="earn-tag">KSh 10–50 each</div></div>
+        <div class="way-card"><div class="way-icon">👥</div><h3>Refer Friends</h3><p>3-level commission structure</p><div class="earn-tag">KSh 300 per L1</div></div>
+        <div class="way-card"><div class="way-icon">🖱️</div><h3>Click Ads</h3><p>Browse sponsored content</p><div class="earn-tag">KSh 5–20 per click</div></div>
+        <div class="way-card"><div class="way-icon">🧠</div><h3>Quizzes</h3><p>Trivia &amp; knowledge challenges</p><div class="earn-tag">KSh 50–200</div></div>
+        <div class="way-card"><div class="way-icon">📅</div><h3>Daily Check-in</h3><p>Login streak bonuses</p><div class="earn-tag">Up to KSh 100/day</div></div>
+        <div class="way-card"><div class="way-icon">📱</div><h3>Social Tasks</h3><p>Follow, share, engage</p><div class="earn-tag">KSh 25–150</div></div>
+        <div class="way-card"><div class="way-icon">🎰</div><h3>Spin & Win</h3><p>Daily prize wheel spin</p><div class="earn-tag">Up to KSh 1,000</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div id="testimonials">
+    <div class="section">
+      <div class="section-tag">Success Stories</div>
+      <h2 class="section-title">Real People, Real Earnings</h2>
+      <p class="section-sub">Join thousands of Kenyans who earn daily on CashQuest.</p>
+      <div class="testimonials-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I withdrew KSh 8,500 last month just from surveys and referrals. This is the real deal — money came straight to my Mpesa."</p>
+          <div class="testi-author"><div class="testi-avatar">WM</div><div><div class="testi-name">Wanjiku M.</div><div class="testi-loc">📍 Nairobi, Kibera</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The referral system is amazing. I referred 12 people and I'm earning commissions on everything they do. Passive income on steroids!"</p>
+          <div class="testi-author"><div class="testi-avatar">KO</div><div><div class="testi-name">Kelvin O.</div><div class="testi-loc">📍 Kisumu</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"I'm a student and CashQuest pays for my data bundles and a bit more. I spend about 2 hours a day and earn KSh 3,000 monthly."</p>
+          <div class="testi-author"><div class="testi-avatar">AN</div><div><div class="testi-name">Amina N.</div><div class="testi-loc">📍 Mombasa</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div style="max-width:1100px;margin:0 auto;padding:0 1.2rem 4rem">
+    <div class="cta-banner">
+      <h2>Ready to Start Earning?</h2>
+      <p>Join 48,000+ Kenyans making money online. Registration is completely free.</p>
+      <button class="btn btn-white" onclick="showPage('register')">🚀 Create Free Account</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="border-top:1px solid var(--border)">
+    <div class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo" style="font-size:1.1rem"><span class="em">Cash</span><span class="sa">Quest</span>&nbsp;Kenya</div>
+          <p>Kenya's most trusted online earning platform. Earn through surveys, tasks, referrals and more.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Earn</h4>
+          <a href="#">Surveys</a><a href="#">Watch Videos</a><a href="#">Refer Friends</a><a href="#">Spin & Win</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a><a href="#">Earnings Disclaimer</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 CashQuest Kenya. All rights reserved.</span>
+        <span>🔒 SSL Secured · 🛡️ Anti-Fraud Protected</span>
+      </div>
+    </div>
+  </div>
+</div><!-- end landing -->
+
+<!-- ══════════════════════════════════════════════════════════
+     REGISTER PAGE
+══════════════════════════════════════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-mark">💰</div>
+        <h1>Create Account</h1>
+        <p>Join CashQuest Kenya — it's free!</p>
+      </div>
+      <div id="reg-step-1">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" placeholder="Mwangi"></div>
+        </div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+254 7XX XXX XXX"></div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="Min 8 characters"></div>
+        <div class="form-group"><label>Referral Code (optional)</label><input type="text" id="regRefCode" placeholder="e.g. CQ-JOHN123" oninput="checkRefCode()"></div>
+        <div class="referral-info hidden" id="refBonus"><span>🎁</span><span>Referral code applied! You'll get a KSh 50 welcome bonus.</span></div>
+        <button class="btn btn-primary w-full" onclick="goRegStep2()">Continue →</button>
+      </div>
+      <div id="reg-step-2" class="hidden">
+        <p class="text-muted text-sm mb-4">Enter the 6-digit code sent to your phone number</p>
+        <div class="otp-inputs" id="otpInputs">
+          <input type="text" maxlength="1" oninput="otpMove(this,0)">
+          <input type="text" maxlength="1" oninput="otpMove(this,1)">
+          <input type="text" maxlength="1" oninput="otpMove(this,2)">
+          <input type="text" maxlength="1" oninput="otpMove(this,3)">
+          <input type="text" maxlength="1" oninput="otpMove(this,4)">
+          <input type="text" maxlength="1" oninput="otpMove(this,5)">
+        </div>
+        <p class="text-sm text-muted mt-3 mb-4" style="text-align:center">Hint: enter any 6 digits to continue demo</p>
+        <button class="btn btn-primary w-full" onclick="completeReg()">Verify & Create Account</button>
+        <button class="btn btn-ghost w-full mt-2" onclick="showRegStep1()">← Back</button>
+      </div>
+      <div class="auth-switch">Already have an account? <a onclick="showPage('login')">Log in</a></div>
+      <div class="auth-switch mt-2"><a onclick="showPage('landing')">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-mark">🔐</div>
+        <h1>Welcome Back</h1>
+        <p>Log in to continue earning</p>
+      </div>
+      <div class="form-group"><label>Phone or Email</label><input type="text" placeholder="+254 7XX... or email"></div>
+      <div class="form-group"><label>Password</label><input type="password" placeholder="Your password"></div>
+      <div style="text-align:right;margin-bottom:1rem"><a style="font-size:.82rem;color:var(--emerald);font-weight:600;cursor:pointer" onclick="showForgot()">Forgot password?</a></div>
+      <button class="btn btn-primary w-full" onclick="doLogin()">Log In</button>
+      <div class="auth-divider">or</div>
+      <button class="btn btn-ghost w-full" style="border:1.5px solid var(--border)" onclick="doLogin()">🔑 Login with OTP</button>
+      <div class="auth-switch mt-3">Don't have an account? <a onclick="showPage('register')">Register free</a></div>
+      <div class="auth-switch mt-2"><a onclick="showPage('landing')">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════════════════════════ -->
+<div id="page-dashboard" class="page">
+
+  <!-- HEADER -->
+  <header class="dash-header">
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="logo"><span class="em">Cash</span><span class="sa">Quest</span></div>
+    <div class="header-user" style="gap:.6rem">
+      <button class="notif-btn" onclick="showNotifications()">🔔<span class="notif-dot"></span></button>
+      <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+      <div class="header-avatar">JM</div>
+      <span class="header-name">John M.</span>
+      <button class="btn btn-ghost btn-sm" onclick="showPage('landing')" style="padding:.4rem .8rem;font-size:.78rem">Log Out</button>
+    </div>
+  </header>
+
+  <!-- SIDEBAR OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <div class="dash-body">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-wallet">
+        <div class="label">Available Balance</div>
+        <div class="amount">KSh 3,240</div>
+        <div class="sub">↑ KSh 650 this week</div>
+      </div>
+
+      <div class="nav-section">Main</div>
+      <div class="nav-item active" onclick="switchPanel('overview',this)"><span class="icon">🏠</span> Overview</div>
+      <div class="nav-item" onclick="switchPanel('surveys',this)"><span class="icon">📋</span> Surveys <span class="badge-count">5</span></div>
+      <div class="nav-item" onclick="switchPanel('tasks',this)"><span class="icon">⚡</span> Task Center</div>
+      <div class="nav-item" onclick="switchPanel('spin',this)"><span class="icon">🎰</span> Spin & Win</div>
+
+      <div class="nav-section">Finance</div>
+      <div class="nav-item" onclick="switchPanel('wallet',this)"><span class="icon">💼</span> My Wallet</div>
+      <div class="nav-item" onclick="switchPanel('referral',this)"><span class="icon">👥</span> Referrals</div>
+
+      <div class="nav-section">Community</div>
+      <div class="nav-item" onclick="switchPanel('leaderboard',this)"><span class="icon">🏆</span> Leaderboard</div>
+
+      <div class="nav-section">Account</div>
+      <div class="nav-item" onclick="switchPanel('admin',this)"><span class="icon">⚙️</span> Admin Panel</div>
+      <div class="nav-item" onclick="showPage('landing')"><span class="icon">🚪</span> Log Out</div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content" id="mainContent">
+
+      <!-- ── OVERVIEW PANEL ── -->
+      <div id="panel-overview" class="panel active">
+        <h2 class="panel-title">Good Morning, John! 👋</h2>
+
+        <div class="overview-stats">
+          <div class="ov-stat">
+            <div class="label">💼 Total Balance</div>
+            <div class="value">KSh 3,240</div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:30%"></div><div class="chart-bar" style="height:50%"></div><div class="chart-bar" style="height:40%"></div><div class="chart-bar" style="height:70%"></div><div class="chart-bar" style="height:60%"></div><div class="chart-bar" style="height:80%"></div><div class="chart-bar active" style="height:100%"></div></div>
+            <div class="change change-up">↑ 22% this week</div>
+          </div>
+          <div class="ov-stat">
+            <div class="label">👥 Referral Earnings</div>
+            <div class="value">KSh 1,500</div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:20%"></div><div class="chart-bar" style="height:40%"></div><div class="chart-bar" style="height:35%"></div><div class="chart-bar" style="height:55%"></div><div class="chart-bar active" style="height:80%"></div><div class="chart-bar" style="height:75%"></div><div class="chart-bar" style="height:90%"></div></div>
+            <div class="change change-up">↑ 5 new referrals</div>
+          </div>
+          <div class="ov-stat">
+            <div class="label">📋 Survey Earnings</div>
+            <div class="value">KSh 840</div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:60%"></div><div class="chart-bar" style="height:40%"></div><div class="chart-bar" style="height:80%"></div><div class="chart-bar active" style="height:100%"></div><div class="chart-bar" style="height:70%"></div><div class="chart-bar" style="height:50%"></div><div class="chart-bar" style="height:90%"></div></div>
+            <div class="change change-up">↑ 8 surveys done</div>
+          </div>
+          <div class="ov-stat">
+            <div class="label">🏆 Rank Position</div>
+            <div class="value">#24</div>
+            <div class="chart-bar-wrap"><div class="chart-bar" style="height:50%"></div><div class="chart-bar" style="height:60%"></div><div class="chart-bar" style="height:55%"></div><div class="chart-bar" style="height:75%"></div><div class="chart-bar" style="height:70%"></div><div class="chart-bar" style="height:85%"></div><div class="chart-bar active" style="height:100%"></div></div>
+            <div class="change change-up">↑ Up 6 places</div>
+          </div>
+        </div>
+
+        <h3 class="font-600 mt-4 mb-3" style="font-size:.95rem">Quick Actions</h3>
+        <div class="quick-actions">
+          <div class="qa-btn" onclick="switchPanel('surveys',document.querySelector('[onclick*=\"surveys\"]'))"><div class="qa-icon">📋</div>Take Survey</div>
+          <div class="qa-btn" onclick="switchPanel('spin',document.querySelectorAll('.nav-item')[3])"><div class="qa-icon">🎰</div>Spin Wheel</div>
+          <div class="qa-btn" onclick="switchPanel('referral',document.querySelectorAll('.nav-item')[6])"><div class="qa-icon">👥</div>Refer Friend</div>
+          <div class="qa-btn" onclick="switchPanel('wallet',document.querySelectorAll('.nav-item')[5])"><div class="qa-icon">💸</div>Withdraw</div>
+        </div>
+
+        <div style="display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.5rem">
+          <!-- Daily check-in -->
+          <div class="card">
+            <div class="flex items-center gap-3 mb-3">
+              <div style="font-size:1.4rem">📅</div>
+              <div><div class="font-600">Daily Check-in Streak</div><div class="text-sm text-muted">Claim your daily bonus</div></div>
+              <span class="badge badge-gold" style="margin-left:auto">Day 7</span>
+            </div>
+            <div style="display:flex;gap:.5rem;margin-bottom:1rem">
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Mon</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Tue</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Wed</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Thu</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Fri</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--emerald);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">✓</div><div class="text-xs text-muted">Sat</div></div>
+              <div style="flex:1;text-align:center"><div style="width:36px;height:36px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;margin:0 auto .3rem">🎁</div><div class="text-xs text-muted" style="color:var(--gold);font-weight:700">Today</div></div>
+            </div>
+            <button class="btn btn-gold w-full" onclick="claimCheckin()">🎁 Claim Day 7 Bonus — KSh 100</button>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card">
+            <div class="flex items-center gap-2 mb-1" style="justify-content:space-between">
+              <h3 class="font-600" style="font-size:.97rem">Recent Activity</h3>
+              <span class="text-sm text-muted">Today</span>
+            </div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-icon ai-green">📋</div><div><div class="activity-desc">Survey: Consumer Habits Kenya</div><div class="activity-time">2 hours ago</div></div><div class="activity-amount">+KSh 150</div></div>
+              <div class="activity-item"><div class="activity-icon ai-blue">👥</div><div><div class="activity-desc">Referral: Wambua K. joined</div><div class="activity-time">4 hours ago</div></div><div class="activity-amount">+KSh 300</div></div>
+              <div class="activity-item"><div class="activity-icon ai-green">🎥</div><div><div class="activity-desc">Video: Safaricom Ad Watched</div><div class="activity-time">5 hours ago</div></div><div class="activity-amount">+KSh 25</div></div>
+              <div class="activity-item"><div class="activity-icon ai-gold">🎰</div><div><div class="activity-desc">Spin Wheel: Lucky Win!</div><div class="activity-time">Yesterday</div></div><div class="activity-amount">+KSh 200</div></div>
+              <div class="activity-item"><div class="activity-icon" style="background:rgba(239,68,68,.1)">💸</div><div><div class="activity-desc">Withdrawal to M-Pesa</div><div class="activity-time">2 days ago</div></div><div class="activity-amount" style="color:#ef4444">-KSh 2,000</div></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end overview -->
+
+      <!-- ── SURVEYS PANEL ── -->
+      <div id="panel-surveys" class="panel">
+        <h2 class="panel-title">📋 Available Surveys</h2>
+        <div class="flex gap-3 items-center mb-4" style="flex-wrap:wrap">
+          <span class="badge badge-green">5 Available</span>
+          <span class="badge badge-blue">8 Completed</span>
+          <span class="badge badge-gold">KSh 840 Earned</span>
+        </div>
+        <div class="survey-list">
+          <div class="survey-card">
+            <div class="survey-meta"><span class="badge badge-green">🔥 New</span><span class="badge badge-blue">Market Research</span></div>
+            <h3>Consumer Shopping Habits in Nairobi 2025</h3>
+            <p>Tell us about your online and offline shopping preferences to help retailers improve their services in Kenya.</p>
+            <div class="survey-footer">
+              <span class="survey-reward">KSh 250</span>
+              <span class="survey-detail">⏱ 12 min</span>
+              <span class="survey-detail">📊 8 questions</span>
+              <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startSurvey('Consumer Shopping Habits',250)">Start →</button>
+            </div>
+          </div>
+          <div class="survey-card">
+            <div class="survey-meta"><span class="badge badge-gold">⭐ High Pay</span><span class="badge badge-blue">Technology</span></div>
+            <h3>Mobile Banking & Fintech Usage Survey</h3>
+            <p>Share your experience with mobile money services, banking apps, and digital payments in Kenya.</p>
+            <div class="survey-footer">
+              <span class="survey-reward">KSh 500</span>
+              <span class="survey-detail">⏱ 20 min</span>
+              <span class="survey-detail">📊 15 questions</span>
+              <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startSurvey('Mobile Banking Survey',500)">Start →</button>
+            </div>
+          </div>
+          <div class="survey-card">
+            <div class="survey-meta"><span class="badge badge-green">Quick</span><span class="badge badge-blue">Food & Lifestyle</span></div>
+            <h3>Daily Meal Preferences — Kenyan Cuisine</h3>
+            <p>A quick poll about your food preferences, favourite restaurants, and eating habits.</p>
+            <div class="survey-footer">
+              <span class="survey-reward">KSh 100</span>
+              <span class="survey-detail">⏱ 5 min</span>
+              <span class="survey-detail">📊 5 questions</span>
+              <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startSurvey('Meal Preferences Poll',100)">Start →</button>
+            </div>
+          </div>
+          <div class="survey-card">
+            <div class="survey-meta"><span class="badge badge-green">New</span><span class="badge badge-blue">Health</span></div>
+            <h3>Health & Wellness Attitudes 2025</h3>
+            <p>Share your views on healthcare access, wellness habits, and health spending priorities in Kenya.</p>
+            <div class="survey-footer">
+              <span class="survey-reward">KSh 200</span>
+              <span class="survey-detail">⏱ 10 min</span>
+              <span class="survey-detail">📊 10 questions</span>
+              <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startSurvey('Health & Wellness Survey',200)">Start →</button>
+            </div>
+          </div>
+          <div class="survey-card">
+            <div class="survey-meta"><span class="badge badge-gold">Exclusive</span><span class="badge badge-blue">Entertainment</span></div>
+            <h3>Streaming & Entertainment Spending in EA</h3>
+            <p>How do you consume digital entertainment? Netflix, YouTube, TikTok and more. Your opinion shapes ad budgets.</p>
+            <div class="survey-footer">
+              <span class="survey-reward">KSh 350</span>
+              <span class="survey-detail">⏱ 15 min</span>
+              <span class="survey-detail">📊 12 questions</span>
+              <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="startSurvey('Entertainment Survey',350)">Start →</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- end surveys -->
+
+      <!-- ── TASKS PANEL ── -->
+      <div id="panel-tasks" class="panel">
+        <h2 class="panel-title">⚡ Task Center</h2>
+        <div class="task-tabs">
+          <div class="task-tab active" onclick="filterTasks('all',this)">All Tasks</div>
+          <div class="task-tab" onclick="filterTasks('video',this)">🎥 Videos</div>
+          <div class="task-tab" onclick="filterTasks('social',this)">📱 Social</div>
+          <div class="task-tab" onclick="filterTasks('app',this)">📲 Apps</div>
+          <div class="task-tab" onclick="filterTasks('quiz',this)">🧠 Quizzes</div>
+        </div>
+        <div class="task-grid" id="taskGrid">
+          <div class="task-card" data-cat="video"><div class="task-thumb">🎥</div><div class="task-info"><h3>Watch: Equity Bank Promo</h3><p>Watch the full 2-minute promotional video about Equity Bank's new EazzyBiz product.</p><div class="task-footer"><span class="task-reward">+KSh 25</span><span class="badge badge-green">2 min</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Watch Video',25)">Watch</button></div></div></div>
+          <div class="task-card" data-cat="social"><div class="task-thumb">📱</div><div class="task-info"><h3>Follow: SafaricomPLC Twitter</h3><p>Follow @SafaricomPLC on Twitter/X and stay updated with their latest offers.</p><div class="task-footer"><span class="task-reward">+KSh 50</span><span class="badge badge-blue">Social</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Follow Page',50)">Follow</button></div></div></div>
+          <div class="task-card" data-cat="quiz"><div class="task-thumb">🧠</div><div class="task-info"><h3>Quiz: Kenya Geography Trivia</h3><p>Answer 10 questions about Kenyan counties, rivers, and landmarks to win points.</p><div class="task-footer"><span class="task-reward">+KSh 150</span><span class="badge badge-gold">5 min</span><button class="btn btn-primary btn-sm" onclick="startQuiz()">Start Quiz</button></div></div></div>
+          <div class="task-card" data-cat="app"><div class="task-thumb">📲</div><div class="task-info"><h3>Install: Jumia Shopping App</h3><p>Download Jumia app, register, and make one browse session. Simple and quick.</p><div class="task-footer"><span class="task-reward">+KSh 200</span><span class="badge badge-blue">App</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Install App',200)">Install</button></div></div></div>
+          <div class="task-card" data-cat="social"><div class="task-thumb">📤</div><div class="task-info"><h3>Share: CashQuest on WhatsApp</h3><p>Share the CashQuest referral post in at least one WhatsApp group to earn your reward.</p><div class="task-footer"><span class="task-reward">+KSh 75</span><span class="badge badge-green">Social</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Share Content',75)">Share</button></div></div></div>
+          <div class="task-card" data-cat="video"><div class="task-thumb">🎬</div><div class="task-info"><h3>Watch: KCB Group Loan Ad</h3><p>Watch the 3-minute KCB Group personal loans advertisement and rate it.</p><div class="task-footer"><span class="task-reward">+KSh 35</span><span class="badge badge-green">3 min</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Watch Video',35)">Watch</button></div></div></div>
+          <div class="task-card" data-cat="social"><div class="task-thumb">📰</div><div class="task-info"><h3>Read Article: Mpesa Anniversary</h3><p>Read the full article about M-Pesa's 18th anniversary achievements and submit a quiz.</p><div class="task-footer"><span class="task-reward">+KSh 60</span><span class="badge badge-blue">Article</span><button class="btn btn-primary btn-sm" onclick="doTask(this,'Read Article',60)">Read</button></div></div></div>
+          <div class="task-card" data-cat="quiz"><div class="task-thumb">❓</div><div class="task-info"><h3>Quiz: Financial Literacy Challenge</h3><p>Test your knowledge of personal finance, savings, and investment in Kenya.</p><div class="task-footer"><span class="task-reward">+KSh 200</span><span class="badge badge-gold">8 min</span><button class="btn btn-primary btn-sm" onclick="startQuiz()">Start Quiz</button></div></div></div>
+        </div>
+      </div><!-- end tasks -->
+
+      <!-- ── SPIN WHEEL PANEL ── -->
+      <div id="panel-spin" class="panel">
+        <h2 class="panel-title">🎰 Spin & Win</h2>
+        <div class="spin-container">
+          <div class="wheel-wrap">
+            <canvas id="wheelCanvas" class="wheel-canvas" width="260" height="260"></canvas>
+            <div class="wheel-pointer">▼</div>
+          </div>
+          <div class="spin-info">
+            <h3>Daily Prize Wheel</h3>
+            <p>Spin once per day. Win cash bonuses, free survey credits, or multiplier boosts!</p>
+            <button class="btn btn-gold w-full" id="spinBtn" onclick="spinWheel()">🎰 Spin Now — Free!</button>
+          </div>
+          <div style="width:100%;max-width:320px">
+            <h3 class="font-600 mb-3" style="font-size:.93rem">Recent Spins</h3>
+            <div class="spin-record">
+              <div class="spin-record-item"><span>John M.</span><span class="text-muted text-xs">Today</span><span class="sr-prize">KSh 500</span></div>
+              <div class="spin-record-item"><span>Wanjiku K.</span><span class="text-muted text-xs">2h ago</span><span class="sr-prize">KSh 100</span></div>
+              <div class="spin-record-item"><span>Ali M.</span><span class="text-muted text-xs">3h ago</span><span class="sr-prize">KSh 1,000 🎉</span></div>
+              <div class="spin-record-item"><span>Beatrice O.</span><span class="text-muted text-xs">5h ago</span><span class="sr-prize">2x Bonus</span></div>
+              <div class="spin-record-item"><span>Samuel N.</span><span class="text-muted text-xs">Yesterday</span><span class="sr-prize">KSh 250</span></div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end spin -->
+
+      <!-- ── WALLET PANEL ── -->
+      <div id="panel-wallet" class="panel">
+        <h2 class="panel-title">💼 My Wallet</h2>
+        <div class="wallet-cards">
+          <div class="wallet-card wc-main"><div class="wc-label">💰 Main Earnings</div><div class="wc-amount">KSh 1,740</div><div class="wc-sub">From tasks & surveys</div></div>
+          <div class="wallet-card wc-ref"><div class="wc-label">👥 Referral Wallet</div><div class="wc-amount">KSh 1,500</div><div class="wc-sub">From 5 referrals</div></div>
+          <div class="wallet-card wc-bonus"><div class="wc-label">🎁 Bonus Wallet</div><div class="wc-amount">KSh 700</div><div class="wc-sub">Spin wins & daily rewards</div></div>
+        </div>
+
+        <div class="withdraw-form">
+          <h3>💸 Withdraw Funds</h3>
+          <div class="form-group"><label>Select Wallet</label>
+            <select><option>Main Earnings — KSh 1,740</option><option>Referral Wallet — KSh 1,500</option><option>Bonus Wallet — KSh 700</option></select>
+          </div>
+          <div class="form-group"><label>Payment Method</label>
+            <div class="payment-methods">
+              <div class="pm-option selected" onclick="selectPM(this)">📱 M-Pesa</div>
+              <div class="pm-option" onclick="selectPM(this)">📞 Airtel Money</div>
+              <div class="pm-option" onclick="selectPM(this)">🏦 Bank Transfer</div>
+            </div>
+          </div>
+          <div class="form-group"><label>Phone Number / Account</label><input type="text" placeholder="+254 7XX XXX XXX" value="+254 712 345 678"></div>
+          <div class="form-group"><label>Amount (Min: KSh 500)</label><input type="number" placeholder="e.g. 1000" min="500"></div>
+          <div style="background:rgba(0,196,122,.07);border:1px solid rgba(0,196,122,.2);border-radius:var(--radius-sm);padding:.75rem;font-size:.82rem;margin-bottom:1rem">
+            ✅ Processing fee: <strong>KSh 0</strong> — Processed within 24 hours.
+          </div>
+          <button class="btn btn-primary w-full" onclick="requestWithdrawal()">Request Withdrawal</button>
+        </div>
+
+        <div class="card mt-4">
+          <h3 class="font-600 mb-3" style="font-size:.97rem">Transaction History</h3>
+          <div class="tx-list">
+            <div class="tx-item"><div class="tx-icon tx-in">📋</div><div><div class="tx-label">Survey Completed</div><div class="tx-sub">Consumer Shopping · 2 hours ago</div></div><div class="tx-amount in">+KSh 250</div></div>
+            <div class="tx-item"><div class="tx-icon tx-out">💸</div><div><div class="tx-label">M-Pesa Withdrawal</div><div class="tx-sub">To 0712345678 · 3 days ago</div></div><div class="tx-amount out">-KSh 2,000</div></div>
+            <div class="tx-item"><div class="tx-icon tx-in">👥</div><div><div class="tx-label">Referral Bonus — L1</div><div class="tx-sub">Wambua K. joined · 4 days ago</div></div><div class="tx-amount in">+KSh 300</div></div>
+            <div class="tx-item"><div class="tx-icon tx-in">🎰</div><div><div class="tx-label">Spin & Win Prize</div><div class="tx-sub">Daily spin · 5 days ago</div></div><div class="tx-amount in">+KSh 500</div></div>
+            <div class="tx-item"><div class="tx-icon tx-in">📅</div><div><div class="tx-label">Daily Check-in Bonus</div><div class="tx-sub">7-day streak · Yesterday</div></div><div class="tx-amount in">+KSh 100</div></div>
+          </div>
+        </div>
+      </div><!-- end wallet -->
+
+      <!-- ── REFERRAL PANEL ── -->
+      <div id="panel-referral" class="panel">
+        <h2 class="panel-title">👥 Referral Program</h2>
+        <div class="card mb-4">
+          <h3 class="font-600 mb-2" style="font-size:.97rem">Your Referral Link</h3>
+          <div class="ref-link-box">
+            <span id="refLinkText">https://cashquest.ke/ref/JOHN2025</span>
+            <button class="btn btn-secondary btn-sm" onclick="copyRefLink()">📋 Copy</button>
+          </div>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+            <button class="btn btn-ghost btn-sm" onclick="shareSMS()">💬 Share via SMS</button>
+          </div>
+        </div>
+
+        <h3 class="font-600 mb-3" style="font-size:.93rem">Commission Structure</h3>
+        <div class="ref-levels">
+          <div class="ref-level"><div class="lv">Level 1</div><div class="earn">KSh 300</div><div class="desc">Direct referral joins</div></div>
+          <div class="ref-level"><div class="lv">Level 2</div><div class="earn">KSh 100</div><div class="desc">Their referrals join</div></div>
+          <div class="ref-level"><div class="lv">Level 3</div><div class="earn">KSh 50</div><div class="desc">3rd-level joins</div></div>
+        </div>
+
+        <div class="ref-team">
+          <div class="ref-team-header">
+            <h3>My Referral Team</h3>
+            <span class="badge badge-green">5 Members</span>
+          </div>
+          <div class="referral-member"><div class="rm-avatar">WK</div><div><div class="rm-name">Wambua K.</div><div class="rm-level text-xs text-muted">Level 1 · Active</div></div><div class="rm-earned">KSh 300</div></div>
+          <div class="referral-member"><div class="rm-avatar">AN</div><div><div class="rm-name">Amina N.</div><div class="rm-level text-xs text-muted">Level 1 · Active</div></div><div class="rm-earned">KSh 300</div></div>
+          <div class="referral-member"><div class="rm-avatar">PO</div><div><div class="rm-name">Peter O.</div><div class="rm-level text-xs text-muted">Level 1 · Active</div></div><div class="rm-earned">KSh 300</div></div>
+          <div class="referral-member"><div class="rm-avatar">GW</div><div><div class="rm-name">Grace W.</div><div class="rm-level text-xs text-muted">Level 2 · New</div></div><div class="rm-earned">KSh 100</div></div>
+          <div class="referral-member"><div class="rm-avatar">SN</div><div><div class="rm-name">Samuel N.</div><div class="rm-level text-xs text-muted">Level 2 · Active</div></div><div class="rm-earned">KSh 100</div></div>
+        </div>
+      </div><!-- end referral -->
+
+      <!-- ── LEADERBOARD PANEL ── -->
+      <div id="panel-leaderboard" class="panel">
+        <h2 class="panel-title">🏆 Top Earners This Month</h2>
+        <div class="flex gap-3 items-center mb-4" style="flex-wrap:wrap">
+          <span class="badge badge-gold">🏆 June 2025</span>
+          <span class="badge badge-green">Top 10 earn bonus KSh 2,000</span>
+        </div>
+        <div class="leaderboard-list">
+          <div class="lb-item" style="border-left:3px solid var(--gold)"><div class="lb-rank top1">🥇</div><div class="lb-avatar" style="background:linear-gradient(135deg,var(--gold),#e8920f)">CK</div><div class="lb-info"><div class="lb-name">Christine K. <span class="lb-badge">👑</span></div><div class="lb-stat">42 tasks · 18 referrals · Nairobi</div></div><div class="lb-earnings">KSh 45,200</div></div>
+          <div class="lb-item" style="border-left:3px solid #94A3B8"><div class="lb-rank top2">🥈</div><div class="lb-avatar" style="background:linear-gradient(135deg,#64748B,#94A3B8)">OM</div><div class="lb-info"><div class="lb-name">Omar M.</div><div class="lb-stat">38 tasks · 14 referrals · Mombasa</div></div><div class="lb-earnings">KSh 38,750</div></div>
+          <div class="lb-item" style="border-left:3px solid #CD7F32"><div class="lb-rank top3">🥉</div><div class="lb-avatar" style="background:linear-gradient(135deg,#CD7F32,#e09240)">RN</div><div class="lb-info"><div class="lb-name">Ruth N.</div><div class="lb-stat">35 tasks · 12 referrals · Kisumu</div></div><div class="lb-earnings">KSh 31,400</div></div>
+          <div class="lb-item"><div class="lb-rank" style="color:var(--muted)">4</div><div class="lb-avatar">BK</div><div class="lb-info"><div class="lb-name">Brian K.</div><div class="lb-stat">29 tasks · 9 referrals · Nakuru</div></div><div class="lb-earnings">KSh 24,800</div></div>
+          <div class="lb-item"><div class="lb-rank" style="color:var(--muted)">5</div><div class="lb-avatar">FW</div><div class="lb-info"><div class="lb-name">Fatuma W.</div><div class="lb-stat">26 tasks · 8 referrals · Eldoret</div></div><div class="lb-earnings">KSh 21,300</div></div>
+          <div class="lb-item"><div class="lb-rank" style="color:var(--muted)">6</div><div class="lb-avatar">DM</div><div class="lb-info"><div class="lb-name">Daniel M.</div><div class="lb-stat">24 tasks · 7 referrals · Thika</div></div><div class="lb-earnings">KSh 18,900</div></div>
+          <div class="lb-item"><div class="lb-rank" style="color:var(--muted)">7</div><div class="lb-avatar">LO</div><div class="lb-info"><div class="lb-name">Linet O.</div><div class="lb-stat">22 tasks · 6 referrals · Nairobi</div></div><div class="lb-earnings">KSh 16,500</div></div>
+          <div class="lb-item" style="border:2px solid var(--emerald);background:rgba(0,196,122,.04)"><div class="lb-rank" style="color:var(--muted)">24</div><div class="lb-avatar">JM</div><div class="lb-info"><div class="lb-name">John M. <span class="badge badge-green" style="font-size:.65rem">You</span></div><div class="lb-stat">12 tasks · 5 referrals · Nairobi</div></div><div class="lb-earnings">KSh 3,240</div></div>
+        </div>
+      </div><!-- end leaderboard -->
+
+      <!-- ── ADMIN PANEL ── -->
+      <div id="panel-admin" class="panel">
+        <h2 class="panel-title">⚙️ Admin Panel</h2>
+        <div class="admin-tabs">
+          <div class="admin-tab active" onclick="switchAdmin('dashboard',this)">📊 Dashboard</div>
+          <div class="admin-tab" onclick="switchAdmin('users',this)">👤 Users</div>
+          <div class="admin-tab" onclick="switchAdmin('surveys',this)">📋 Surveys</div>
+          <div class="admin-tab" onclick="switchAdmin('withdrawals',this)">💸 Withdrawals</div>
+          <div class="admin-tab" onclick="switchAdmin('announcements',this)">📢 Announce</div>
+        </div>
+
+        <div id="admin-dashboard" class="admin-sub">
+          <div class="admin-stats">
+            <div class="admin-stat"><div class="as-num">48,312</div><div class="as-label">Total Users</div></div>
+            <div class="admin-stat"><div class="as-num" style="color:var(--sapphire)">KSh 2.3M</div><div class="as-label">Total Paid Out</div></div>
+            <div class="admin-stat"><div class="as-num" style="color:var(--gold)">127</div><div class="as-label">Pending Withdrawals</div></div>
+            <div class="admin-stat"><div class="as-num" style="color:#ef4444">23</div><div class="as-label">Flagged Accounts</div></div>
+          </div>
+          <div class="card">
+            <h3 class="font-600 mb-3" style="font-size:.93rem">Platform Activity (Last 7 Days)</h3>
+            <div style="display:flex;align-items:flex-end;gap:6px;height:80px;margin-bottom:.5rem">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:30px;opacity:.7"></div><div class="text-xs text-muted">Mon</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:48px;opacity:.8"></div><div class="text-xs text-muted">Tue</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:40px;opacity:.75"></div><div class="text-xs text-muted">Wed</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:60px;opacity:.85"></div><div class="text-xs text-muted">Thu</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:55px;opacity:.9"></div><div class="text-xs text-muted">Fri</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--emerald);border-radius:4px 4px 0 0;width:100%;min-height:72px"></div><div class="text-xs text-muted">Sat</div></div>
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:.3rem"><div style="flex:1;background:var(--sapphire);border-radius:4px 4px 0 0;width:100%;min-height:65px"></div><div class="text-xs text-muted">Sun</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-users" class="admin-sub hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem">
+            <h3 class="font-600">All Users</h3>
+            <div style="display:flex;gap:.6rem"><input type="text" placeholder="Search users..." style="width:200px;padding:.45rem .75rem"><button class="btn btn-primary btn-sm">Search</button></div>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>User</th><th>Phone</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td><div class="flex items-center gap-2"><div class="rm-avatar" style="width:28px;height:28px;font-size:.72rem">CK</div>Christine K.</div></td><td>+254 722 xxx xxx</td><td>KSh 45,200</td><td><span class="status-dot dot-green"></span>Active</td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="rm-avatar" style="width:28px;height:28px;font-size:.72rem">OM</div>Omar M.</div></td><td>+254 733 xxx xxx</td><td>KSh 38,750</td><td><span class="status-dot dot-green"></span>Active</td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="rm-avatar" style="width:28px;height:28px;font-size:.72rem">JM</div>John M.</div></td><td>+254 712 345 678</td><td>KSh 3,240</td><td><span class="status-dot dot-green"></span>Active</td><td><button class="btn btn-ghost btn-sm">View</button></td></tr>
+                <tr><td><div class="flex items-center gap-2"><div class="rm-avatar" style="width:28px;height:28px;font-size:.72rem;background:rgba(239,68,68,.15);color:#ef4444">XB</div>X. Bot Acc.</div></td><td>+254 700 xxx xxx</td><td>KSh 24,000</td><td><span class="status-dot dot-red"></span>Flagged</td><td><button class="btn btn-sm" style="background:rgba(239,68,68,.1);color:#ef4444">Suspend</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="admin-surveys" class="admin-sub hidden">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem">
+            <h3 class="font-600">Manage Surveys</h3>
+            <button class="btn btn-primary btn-sm" onclick="showAddSurveyModal()">+ Add Survey</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Survey</th><th>Reward</th><th>Completions</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Consumer Shopping Habits</td><td>KSh 250</td><td>382</td><td><span class="status-dot dot-green"></span>Active</td><td><button class="btn btn-ghost btn-sm">Edit</button></td></tr>
+                <tr><td>Mobile Banking Survey</td><td>KSh 500</td><td>218</td><td><span class="status-dot dot-green"></span>Active</td><td><button class="btn btn-ghost btn-sm">Edit</button></td></tr>
+                <tr><td>Health & Wellness 2025</td><td>KSh 200</td><td>145</td><td><span class="status-dot dot-orange"></span>Paused</td><td><button class="btn btn-ghost btn-sm">Edit</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="admin-withdrawals" class="admin-sub hidden">
+          <div style="margin-bottom:1rem"><h3 class="font-600">Pending Withdrawals</h3></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>User</th><th>Amount</th><th>Method</th><th>Requested</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Wanjiku M.</td><td>KSh 5,000</td><td>M-Pesa</td><td>2h ago</td><td><button class="btn btn-sm" style="background:rgba(0,196,122,.1);color:var(--emerald)" onclick="approveWithdrawal(this)">Approve</button> <button class="btn btn-sm" style="background:rgba(239,68,68,.1);color:#ef4444">Reject</button></td></tr>
+                <tr><td>Kelvin O.</td><td>KSh 2,500</td><td>Airtel Money</td><td>4h ago</td><td><button class="btn btn-sm" style="background:rgba(0,196,122,.1);color:var(--emerald)" onclick="approveWithdrawal(this)">Approve</button> <button class="btn btn-sm" style="background:rgba(239,68,68,.1);color:#ef4444">Reject</button></td></tr>
+                <tr><td>Amina N.</td><td>KSh 1,000</td><td>M-Pesa</td><td>6h ago</td><td><button class="btn btn-sm" style="background:rgba(0,196,122,.1);color:var(--emerald)" onclick="approveWithdrawal(this)">Approve</button> <button class="btn btn-sm" style="background:rgba(239,68,68,.1);color:#ef4444">Reject</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="admin-announcements" class="admin-sub hidden">
+          <div class="card">
+            <h3 class="font-600 mb-3" style="font-size:.97rem">Send Announcement</h3>
+            <div class="form-group"><label>Title</label><input type="text" placeholder="e.g. 🎉 New bonus survey available!"></div>
+            <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Type your message to all users..."></textarea></div>
+            <div class="form-group"><label>Target Audience</label><select><option>All Users</option><option>Active Users Only</option><option>Top 100 Earners</option><option>New Users (last 7 days)</option></select></div>
+            <button class="btn btn-primary" onclick="sendAnnouncement()">📢 Send to All Users</button>
+          </div>
+        </div>
+      </div><!-- end admin -->
+
+    </main>
+  </div><!-- end dash body -->
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottom-nav">
+    <div class="bn-item active" onclick="switchPanelMobile('overview',this)"><div class="bn-icon">🏠</div><span>Home</span></div>
+    <div class="bn-item" onclick="switchPanelMobile('surveys',this)"><div class="bn-icon">📋</div><span>Surveys</span></div>
+    <div class="bn-item" onclick="switchPanelMobile('tasks',this)"><div class="bn-icon">⚡</div><span>Tasks</span></div>
+    <div class="bn-item" onclick="switchPanelMobile('wallet',this)"><div class="bn-icon">💼</div><span>Wallet</span></div>
+    <div class="bn-item" onclick="switchPanelMobile('referral',this)"><div class="bn-icon">👥</div><span>Refer</span></div>
+  </nav>
+
+</div><!-- end dashboard -->
+
+<!-- ══════════════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════════════ -->
+<script>
+/* ── Page navigation ── */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
+  window.scrollTo(0,0);
+  if (id === 'dashboard') {
+    setTimeout(drawWheel, 100);
+  }
+}
+
+/* ── Theme ── */
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.querySelectorAll('.theme-toggle').forEach(btn => { btn.textContent = isDark ? '🌙' : '☀️'; });
+}
+
+/* ── Toast ── */
+function showToast(msg, type='success') {
+  const c = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = 'toast' + (type === 'error' ? ' error' : type === 'warning' ? ' warning' : '');
+  t.innerHTML = (type === 'success' ? '✅ ' : type === 'error' ? '❌ ' : '⚠️ ') + msg;
+  c.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+/* ── Modal ── */
+function openModal(title, html) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('show'); }
+document.getElementById('modalOverlay').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+/* ── Sidebar ── */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+}
+
+/* ── Dashboard panels ── */
+function switchPanel(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  if (el && el.classList) el.classList.add('active');
+  closeSidebar();
+  if (id === 'spin') setTimeout(drawWheel, 100);
+}
+function switchPanelMobile(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  document.querySelectorAll('.bn-item').forEach(n => n.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+    else n.classList.remove('active');
+  });
+  if (id === 'spin') setTimeout(drawWheel, 100);
+}
+
+/* ── Register ── */
+function checkRefCode() {
+  const v = document.getElementById('regRefCode').value.trim();
+  document.getElementById('refBonus').classList.toggle('hidden', v.length < 3);
+}
+function goRegStep2() {
+  document.getElementById('reg-step-1').classList.add('hidden');
+  document.getElementById('reg-step-2').classList.remove('hidden');
+}
+function showRegStep1() {
+  document.getElementById('reg-step-1').classList.remove('hidden');
+  document.getElementById('reg-step-2').classList.add('hidden');
+}
+function otpMove(el, idx) {
+  if (el.value.length === 1 && idx < 5) {
+    document.querySelectorAll('#otpInputs input')[idx + 1].focus();
+  }
+}
+function completeReg() {
+  const inputs = document.querySelectorAll('#otpInputs input');
+  const otp = Array.from(inputs).map(i=>i.value).join('');
+  if (otp.length < 6) { showToast('Please enter the full 6-digit code', 'error'); return; }
+  showToast('Account created! Welcome to CashQuest Kenya 🎉');
+  setTimeout(() => showPage('dashboard'), 800);
+}
+
+/* ── Login ── */
+function doLogin() {
+  showToast('Login successful! Welcome back, John 👋');
+  setTimeout(() => showPage('dashboard'), 600);
+}
+function showForgot() {
+  openModal('Forgot Password', `
+    <p class="text-muted text-sm mb-4">Enter your phone number or email to receive a reset link.</p>
+    <div class="form-group"><label>Phone or Email</label><input type="text" placeholder="+254 7XX... or email"></div>
+    <button class="btn btn-primary w-full" onclick="closeModal();showToast('Reset link sent to your phone/email')">Send Reset Link</button>
+  `);
+}
+
+/* ── Surveys ── */
+function startSurvey(name, reward) {
+  openModal('📋 ' + name, `
+    <p class="text-sm text-muted mb-4">This survey takes a few minutes. Your honest answers help brands serve Kenyans better.</p>
+    <div style="background:var(--bg);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem">
+      <div class="font-600 mb-2">Q1: How often do you shop online?</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <label style="display:flex;align-items:center;gap:.6rem;font-size:.88rem;cursor:pointer"><input type="radio" name="q1"> Daily</label>
+        <label style="display:flex;align-items:center;gap:.6rem;font-size:.88rem;cursor:pointer"><input type="radio" name="q1"> Weekly</label>
+        <label style="display:flex;align-items:center;gap:.6rem;font-size:.88rem;cursor:pointer"><input type="radio" name="q1"> Monthly</label>
+        <label style="display:flex;align-items:center;gap:.6rem;font-size:.88rem;cursor:pointer"><input type="radio" name="q1"> Rarely</label>
+      </div>
+    </div>
+    <button class="btn btn-primary w-full" onclick="completeSurvey(${reward})">Submit & Claim KSh ${reward}</button>
+  `);
+}
+function completeSurvey(reward) {
+  closeModal();
+  showToast(`🎉 Survey completed! KSh ${reward} added to your wallet`);
+}
+
+/* ── Tasks ── */
+function filterTasks(cat, el) {
+  document.querySelectorAll('.task-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.task-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) card.style.display = '';
+    else card.style.display = 'none';
+  });
+}
+function doTask(btn, label, reward) {
+  btn.textContent = '✓ Done';
+  btn.className = 'task-done';
+  btn.disabled = true;
+  showToast(`✅ ${label} completed! +KSh ${reward} earned`);
+}
+function startQuiz() {
+  openModal('🧠 Kenya Geography Trivia', `
+    <p class="text-sm text-muted mb-4">Answer correctly to earn your reward!</p>
+    <div style="background:var(--bg);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem">
+      <div class="font-600 mb-3">What is the capital of Kenya?</div>
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        <button class="btn btn-ghost w-full" style="justify-content:flex-start;text-align:left;font-size:.88rem" onclick="quizAnswer(true,this)">🏙️ Nairobi</button>
+        <button class="btn btn-ghost w-full" style="justify-content:flex-start;text-align:left;font-size:.88rem" onclick="quizAnswer(false,this)">🌊 Mombasa</button>
+        <button class="btn btn-ghost w-full" style="justify-content:flex-start;text-align:left;font-size:.88rem" onclick="quizAnswer(false,this)">🌳 Kisumu</button>
+      </div>
+    </div>
+    <div id="quizResult" class="hidden"></div>
+  `);
+}
+function quizAnswer(correct, btn) {
+  const res = document.getElementById('quizResult');
+  if (correct) {
+    btn.style.background='rgba(0,196,122,.15)';btn.style.borderColor='var(--emerald)';btn.style.color='var(--emerald)';
+    res.innerHTML='<div class="badge badge-green w-full" style="padding:.75rem;justify-content:center;font-size:.88rem;border-radius:var(--radius-sm)">🎉 Correct! +KSh 150 earned</div>';
+    res.classList.remove('hidden');
+    setTimeout(()=>{closeModal();showToast('Quiz passed! KSh 150 added to wallet');},1200);
+  } else {
+    btn.style.background='rgba(239,68,68,.1)';btn.style.borderColor='#ef4444';btn.style.color='#ef4444';
+    res.innerHTML='<div class="badge badge-red w-full" style="padding:.75rem;justify-content:center;font-size:.88rem;border-radius:var(--radius-sm)">❌ Wrong answer. Try again!</div>';
+    res.classList.remove('hidden');
+  }
+}
+
+/* ── Check-in ── */
+function claimCheckin() {
+  event.target.textContent = '✅ Claimed! KSh 100 added';
+  event.target.disabled = true;
+  event.target.style.opacity = '.7';
+  showToast('🎁 Day 7 bonus claimed! KSh 100 added to wallet');
+}
+
+/* ── Wallet ── */
+function selectPM(el) {
+  document.querySelectorAll('.pm-option').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function requestWithdrawal() {
+  openModal('💸 Confirm Withdrawal', `
+    <div style="text-align:center;padding:1rem 0">
+      <div style="font-size:3rem;margin-bottom:.75rem">💸</div>
+      <h3 class="font-600 mb-1">Withdrawal Requested!</h3>
+      <p class="text-muted text-sm">Your M-Pesa payment will be processed within 24 hours.</p>
+      <div style="background:var(--bg);border-radius:var(--radius-sm);padding:.9rem;margin:1rem 0;text-align:left">
+        <div class="flex items-center gap-2 mb-2"><span class="text-sm text-muted">Amount:</span><span class="font-600" style="margin-left:auto">KSh 1,000</span></div>
+        <div class="flex items-center gap-2 mb-2"><span class="text-sm text-muted">To:</span><span class="font-600" style="margin-left:auto">M-Pesa +254 712 345 678</span></div>
+        <div class="flex items-center gap-2"><span class="text-sm text-muted">Ref:</span><span class="font-600" style="margin-left:auto">CQ-WD-20250615</span></div>
+      </div>
+      <button class="btn btn-primary w-full" onclick="closeModal();showToast('Withdrawal submitted! Check your M-Pesa shortly.')">Done</button>
+    </div>
+  `);
+}
+
+/* ── Referral ── */
+function copyRefLink() {
+  const txt = document.getElementById('refLinkText').textContent;
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  showToast('Referral link copied to clipboard! 🔗');
+}
+function shareWhatsApp() { showToast('Opening WhatsApp... (demo mode)'); }
+function shareSMS() { showToast('Opening SMS... (demo mode)'); }
+
+/* ── Notifications ── */
+function showNotifications() {
+  openModal('🔔 Notifications', `
+    <div class="activity-list">
+      <div class="activity-item"><div class="activity-icon ai-green">👥</div><div><div class="activity-desc font-600">New referral: Wambua K. joined</div><div class="activity-time">2 hours ago</div></div></div>
+      <div class="activity-item"><div class="activity-icon ai-gold">🎁</div><div><div class="activity-desc font-600">New survey available: Mobile Banking</div><div class="activity-time">4 hours ago</div></div></div>
+      <div class="activity-item"><div class="activity-icon ai-blue">💸</div><div><div class="activity-desc font-600">Withdrawal of KSh 2,000 approved!</div><div class="activity-time">1 day ago</div></div></div>
+      <div class="activity-item"><div class="activity-icon ai-green">🏆</div><div><div class="activity-desc font-600">You moved up to rank #24 on leaderboard</div><div class="activity-time">2 days ago</div></div></div>
+    </div>
+    <button class="btn btn-ghost w-full mt-3" onclick="closeModal()">Close</button>
+  `);
+}
+
+/* ── Spin Wheel ── */
+const PRIZES = [
+  {label:'KSh 50',color:'#00C47A',value:50},
+  {label:'KSh 100',color:'#0A5CF5',value:100},
+  {label:'Try Again',color:'#94A3B8',value:0},
+  {label:'KSh 500',color:'#F5A623',value:500},
+  {label:'KSh 25',color:'#00C47A',value:25},
+  {label:'KSh 1,000',color:'#0D3AAF',value:1000},
+  {label:'2x Bonus',color:'#009E60',value:200},
+  {label:'KSh 200',color:'#0A5CF5',value:200},
+];
+let spinning = false;
+let currentAngle = 0;
+
+function drawWheel(angle=0) {
+  const canvas = document.getElementById('wheelCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const cx = 130, cy = 130, r = 120;
+  const slice = (Math.PI * 2) / PRIZES.length;
+  ctx.clearRect(0,0,260,260);
+  PRIZES.forEach((p,i) => {
+    const start = angle + i * slice - Math.PI/2;
+    const end = start + slice;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,end);
+    ctx.closePath();
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(start + slice/2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 11px Plus Jakarta Sans,sans-serif';
+    ctx.fillText(p.label, r-10, 4);
+    ctx.restore();
+  });
+  // center circle
+  ctx.beginPath();
+  ctx.arc(cx,cy,22,0,Math.PI*2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(cx,cy,16,0,Math.PI*2);
+  ctx.fillStyle = '#0A5CF5';
+  ctx.fill();
+  ctx.fillStyle='#fff';
+  ctx.font='bold 10px sans-serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('GO',cx,cy);
+}
+
+function spinWheel() {
+  if (spinning) return;
+  spinning = true;
+  const btn = document.getElementById('spinBtn');
+  btn.disabled = true;
+  btn.textContent = '🌀 Spinning...';
+  const sliceAngle = (Math.PI * 2) / PRIZES.length;
+  const winner = Math.floor(Math.random() * PRIZES.length);
+  const targetAngle = Math.PI * 2 * 5 + (Math.PI * 2 - winner * sliceAngle) + sliceAngle / 2;
+  const start = performance.now();
+  const duration = 4000;
+  const startAngle = currentAngle;
+  function animate(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 4);
+    const angle = startAngle + targetAngle * ease;
+    currentAngle = angle;
+    drawWheel(angle);
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      spinning = false;
+      const prize = PRIZES[winner];
+      setTimeout(() => {
+        if (prize.value > 0) {
+          showToast(`🎰 You won ${prize.label}! Added to your bonus wallet`);
+        } else {
+          showToast('Better luck next time! Come back tomorrow 🎲', 'warning');
+        }
+        btn.textContent = '✅ Spun Today — Come Back Tomorrow';
+      }, 300);
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+/* ── Admin ── */
+function switchAdmin(id, el) {
+  document.querySelectorAll('.admin-sub').forEach(s => s.classList.add('hidden'));
+  document.getElementById('admin-' + id).classList.remove('hidden');
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+function showAddSurveyModal() {
+  openModal('+ Add New Survey', `
+    <div class="form-group"><label>Survey Title</label><input type="text" placeholder="e.g. Brand Awareness Study 2025"></div>
+    <div class="form-row"><div class="form-group"><label>Reward (KSh)</label><input type="number" placeholder="e.g. 300"></div><div class="form-group"><label>Duration (min)</label><input type="number" placeholder="e.g. 10"></div></div>
+    <div class="form-group"><label>Category</label><select><option>Market Research</option><option>Technology</option><option>Health</option><option>Food & Lifestyle</option><option>Finance</option></select></div>
+    <div class="form-group"><label>Description</label><textarea rows="3" placeholder="Brief description of the survey..."></textarea></div>
+    <button class="btn btn-primary w-full" onclick="closeModal();showToast('Survey created successfully!')">Create Survey</button>
+  `);
+}
+function approveWithdrawal(btn) {
+  const row = btn.closest('tr');
+  row.style.opacity = '.5';
+  btn.textContent = '✓ Approved';
+  btn.disabled = true;
+  showToast('Withdrawal approved and sent via M-Pesa ✅');
+}
+function sendAnnouncement() {
+  showToast('📢 Announcement sent to all 48,312 users!');
+}
+
+/* ── Scroll helper ── */
+function scrollToHow() {
+  document.getElementById('how').scrollIntoView({behavior:'smooth'});
+}
+
+/* ── Init ── */
+window.addEventListener('load', () => {
+  drawWheel();
+});
+</script>
+</body>
+</html>
